@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>RankNotes — Panel de Dirección</title>
   <link rel="stylesheet" href="director.css">
   <!-- Supabase CDN Oficial -->
@@ -10,45 +10,49 @@
 </head>
 <body>
   <div class="layout">
+    <!-- CAPA OSCURA PARA CERRAR EL MENÚ AL TOCAR AFUERA -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
     <!-- BARRA SUPERIOR -->
     <header class="topbar">
       <div class="topbar-left">
-        <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menú">
+        <button id="menu-toggle" class="hamburger-btn" type="button" aria-label="Abrir menú">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
-        <div class="brand">rank<span>notes</span> · <small>Dirección General</small></div>
+        <div class="brand">rank<span>notes</span> <small class="brand-sub">· Dirección</small></div>
       </div>
       <div class="topbar-right">
         <span id="director-name" class="user-badge">Dirección</span>
-        
-        <!-- BOTÓN MODO CLARO / OSCURO -->
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Modo claro/oscuro">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema">
           <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z"></path>
           </svg>
         </button>
-
-        <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+        <button class="btn-logout" onclick="logout()">Salir</button>
       </div>
     </header>
 
     <div class="main-wrapper">
       <!-- MENÚ LATERAL (SIDEBAR) -->
       <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header-mobile">
+          <span>Menú de Opciones</span>
+          <button id="close-menu-btn" class="btn-close-menu">✕</button>
+        </div>
         <nav class="nav-menu">
-          <button class="nav-item active" onclick="switchSection('docentes-sec', this)">
+          <button class="nav-item active" type="button" onclick="switchSection('docentes-sec', this)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             Plantel Docente
           </button>
-          <button class="nav-item" onclick="switchSection('asignaciones-sec', this)">
+          <button class="nav-item" type="button" onclick="switchSection('asignaciones-sec', this)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="m9 14 2 2 4-4"></path></svg>
             Asignación de Materias
           </button>
-          <button class="nav-item" onclick="switchSection('estudiantes-sec', this)">
+          <button class="nav-item" type="button" onclick="switchSection('estudiantes-sec', this)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
             Estudiantes
           </button>
-          <button class="nav-item" onclick="switchSection('cursos-sec', this)">
+          <button class="nav-item" type="button" onclick="switchSection('cursos-sec', this)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
             Cursos y Paralelos
           </button>
@@ -59,14 +63,14 @@
         </nav>
       </aside>
 
-      <!-- CONTENIDO PRINCIPAL DINÁMICO -->
+      <!-- CONTENIDO PRINCIPAL -->
       <main class="content-area">
 
         <!-- MÓDULO 1: DOCENTES -->
         <section id="docentes-sec" class="module-section active">
           <div class="module-header">
-            <h2>Gestión de Maestros y Profesores</h2>
-            <p>Registre nuevos docentes, asigne credenciales por carnet o gestione bajas institucionales.</p>
+            <h2>Plantel Docente</h2>
+            <p>Registro de maestros y control de credenciales.</p>
           </div>
 
           <div class="card form-card">
@@ -77,15 +81,15 @@
                 <input type="text" id="doc-nombre" placeholder="Ej: Prof. Juan Carlos Pérez" required>
               </div>
               <div class="form-group">
-                <label>Carnet de Identidad (Usuario)</label>
+                <label>Carnet / Usuario</label>
                 <input type="text" id="doc-ci" placeholder="Ej: 1003" required>
               </div>
               <div class="form-group">
-                <label>Contraseña Inicial</label>
-                <input type="text" id="doc-password" placeholder="Por defecto será su carnet">
+                <label>Contraseña</label>
+                <input type="text" id="doc-password" placeholder="Por defecto su C.I.">
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Registrar Docente</button>
+                <button type="submit" class="btn btn-primary">Registrar</button>
               </div>
             </form>
           </div>
@@ -97,7 +101,7 @@
                 <thead>
                   <tr>
                     <th>Nombre Completo</th>
-                    <th>Carnet / Usuario</th>
+                    <th>C.I.</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -113,34 +117,37 @@
         <!-- MÓDULO 2: ASIGNACIONES DOCENTES -->
         <section id="asignaciones-sec" class="module-section">
           <div class="module-header">
-            <h2>Asignación Académica y Horarios</h2>
-            <p>Vincule a cada docente con el curso y materia correspondiente (Primaria o Secundaria).</p>
+            <h2>Asignación de Materias</h2>
+            <p>Vincule al docente con su curso y materia curricular.</p>
           </div>
 
           <div class="card form-card">
             <h3>Nueva Asignación</h3>
             <form id="form-asignacion" class="grid-form">
               <div class="form-group">
-                <label>Seleccionar Docente</label>
+                <label>Docente</label>
                 <select id="asig-docente" required></select>
               </div>
               <div class="form-group">
-                <label>Curso / Año Escolar</label>
+                <label>Curso</label>
                 <select id="asig-curso" required></select>
               </div>
               <div class="form-group">
-                <label>Materia Curricular</label>
+                <label>Materia</label>
                 <select id="asig-materia" required></select>
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Asignar Materia a Docente</button>
+                <button type="submit" class="btn btn-primary">Guardar Asignación</button>
               </div>
             </form>
           </div>
 
           <div class="card table-card">
-            <h3>Carga Horaria Actual Asignada</h3>
-            <div class="table-responsive">
+            <div class="filter-bar">
+              <h3>Carga Horaria Asignada</h3>
+              <input type="text" id="search-asig" placeholder="Buscar por docente o curso..." oninput="filtrarAsignaciones()" class="input-search-inline">
+            </div>
+            <div class="table-responsive scrollable-table">
               <table>
                 <thead>
                   <tr>
@@ -161,44 +168,44 @@
         <!-- MÓDULO 3: ESTUDIANTES -->
         <section id="estudiantes-sec" class="module-section">
           <div class="module-header">
-            <h2>Matriculación y Gestión de Alumnos</h2>
-            <p>Administre el padrón estudiantil por cursos y controle altas o retiros escolares.</p>
+            <h2>Padrón de Estudiantes</h2>
+            <p>Matriculación y control por cursos.</p>
           </div>
 
           <div class="card form-card">
-            <h3>Matricular Nuevo Estudiante</h3>
+            <h3>Matricular Estudiante</h3>
             <form id="form-estudiante" class="grid-form">
               <div class="form-group">
-                <label>Nombre Completo del Estudiante</label>
+                <label>Nombre Completo</label>
                 <input type="text" id="est-nombre" placeholder="Ej: Gabriel Rojas Céspedes" required>
               </div>
               <div class="form-group">
-                <label>C.I. o Código RUDE (Usuario y Clave)</label>
+                <label>C.I. / RUDE</label>
                 <input type="text" id="est-ci" placeholder="Ej: 14589632" required>
               </div>
               <div class="form-group">
-                <label>Curso de Matriculación</label>
+                <label>Curso</label>
                 <select id="est-curso" required></select>
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Matricular Estudiante</button>
+                <button type="submit" class="btn btn-primary">Matricular</button>
               </div>
             </form>
           </div>
 
           <div class="card table-card">
             <div class="filter-bar">
-              <h3>Estudiantes Matriculados</h3>
+              <h3>Estudiantes</h3>
               <select id="filtro-est-curso" onchange="cargarEstudiantes()">
                 <option value="todos">Todos los cursos</option>
               </select>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive scrollable-table">
               <table>
                 <thead>
                   <tr>
                     <th>Estudiante</th>
-                    <th>C.I. / RUDE</th>
+                    <th>C.I.</th>
                     <th>Curso</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -215,12 +222,12 @@
         <!-- MÓDULO 4: CURSOS Y PARALELOS -->
         <section id="cursos-sec" class="module-section">
           <div class="module-header">
-            <h2>Cursos y Años Escolares</h2>
-            <p>Configure los cursos habilitados en la institución tanto para nivel Primario como Secundario.</p>
+            <h2>Cursos y Paralelos</h2>
+            <p>Configuración de aulas para Primaria y Secundaria.</p>
           </div>
 
           <div class="card form-card">
-            <h3>Añadir Curso / Paralelo</h3>
+            <h3>Añadir Curso</h3>
             <form id="form-curso" class="grid-form">
               <div class="form-group">
                 <label>Nivel</label>
@@ -230,7 +237,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>Grado Escolar</label>
+                <label>Grado</label>
                 <input type="text" id="curso-grado" placeholder="Ej: 4° Secundaria" required>
               </div>
               <div class="form-group">
@@ -238,13 +245,13 @@
                 <input type="text" id="curso-paralelo" value="A" required>
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Registrar Curso</button>
+                <button type="submit" class="btn btn-primary">Crear</button>
               </div>
             </form>
           </div>
 
           <div class="card table-card">
-            <h3>Cursos Activos (Gestión 2026)</h3>
+            <h3>Cursos Activos (2026)</h3>
             <div class="table-responsive">
               <table>
                 <thead>
