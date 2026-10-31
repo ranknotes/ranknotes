@@ -4,16 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f7f7fb">
-  <meta name="description" content="RankNotes - Plataforma institucional de seguimiento académico y cuadros de honor de la U.E. Avelino Siñani.">
+  <meta name="description" content="RankNotes — Plataforma web de seguimiento académico y gamificación escolar para la U.E. Avelino Siñani.">
   <title>RankNotes — U.E. Avelino Siñani</title>
-  
   <link rel="stylesheet" href="style.css">
-  <!-- Supabase CDN Oficial -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="app">
-    <!-- BARRA SUPERIOR INSTITUCIONAL -->
+    <!-- TOPBAR INSTITUCIONAL -->
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">
@@ -28,25 +26,18 @@
 
       <div class="topbar-right">
         <div class="school-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m3 10 9-7 9 7"></path><path d="M5 9v11h14V9"></path><path d="M9 20v-6h6v6"></path>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 10 9-7 9 7"></path><path d="M5 9v11h14V9"></path><path d="M9 20v-6h6v6"></path></svg>
           U.E. Avelino Siñani · Warnes
         </div>
 
-        <!-- BOTÓN DE INGRESO / ESTADO DE SESIÓN -->
         <div id="auth-area">
-          <a href="login.html" class="btn-login" id="btn-login-nav">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-              <polyline points="10 17 15 12 10 7"></polyline>
-              <line x1="15" y1="12" x2="3" y2="12"></line>
-            </svg>
-            Iniciar Sesión
+          <a href="login.html" class="btn-login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            Ingresar al Sistema
           </a>
         </div>
 
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Modo claro/oscuro">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema">
           <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z"></path>
           </svg>
@@ -55,149 +46,127 @@
     </header>
 
     <main>
-      <!-- BANNER INSTITUCIONAL Y BIENVENIDA -->
-      <section class="welcome" aria-labelledby="page-title">
-        <div>
-          <div class="eyebrow"><span class="eyebrow-dot"></span> Comunidad Educativa · Gestión 2026</div>
-          <h1 id="page-title">El esfuerzo se reconoce<span style="color:var(--purple)">.</span></h1>
-          <p>Plataforma de visualización académica, cuadros de honor y seguimiento continuo del rendimiento escolar.</p>
-        </div>
-        <div class="period-tabs" role="group" aria-label="Periodo de notas">
-          <button class="period-button active" type="button" data-period="s1">1er Trimestre</button>
-          <button class="period-button" type="button" data-period="s2">2do Trimestre</button>
-          <button class="period-button" type="button" data-period="s3">3er Trimestre</button>
-          <button class="period-button" type="button" data-period="year">Gestión Anual</button>
+      <!-- HERO LANDING PAGE -->
+      <section class="landing-hero">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Bachillerato Técnico Humanístico (BTH) · 2026</div>
+        <h1>El talento escolar merece ser reconocido<span style="color:var(--purple)">.</span></h1>
+        <p class="hero-lead">
+          RankNotes es la plataforma educativa diseñada para transformar el registro de calificaciones en una experiencia de motivación, transparencia y sana competencia académica mediante gamificación escolar.
+        </p>
+        <div class="hero-actions">
+          <a href="login.html" class="btn-hero-primary">Acceder al Sistema Institucional →</a>
+          <a href="#como-funciona" class="btn-hero-secondary">¿Cómo Funciona?</a>
         </div>
       </section>
 
-      <!-- MENSAJE DE INDICACIÓN PARA LA COMUNIDAD -->
-      <section class="info-banner">
-        <div class="info-content">
-          <div class="info-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-          </div>
-          <div>
-            <strong>¿Eres estudiante o maestro de la U.E. Avelino Siñani?</strong>
-            <p>Inicia sesión con tu <strong>Carnet de Identidad</strong> para ver tus calificaciones detalladas o registrar valoraciones trimestrales en tu curso asignado.</p>
-          </div>
-        </div>
-        <a href="login.html" class="info-btn">Acceder al Sistema →</a>
-      </section>
-
-      <!-- TARJETAS DE RESUMEN ACADÉMICO -->
-      <section class="summary-grid" aria-label="Resumen académico">
+      <!-- TARJETAS DE PILARES DEL PROYECTO -->
+      <section class="summary-grid">
         <article class="summary-card">
           <div class="summary-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="10" cy="7" r="4"></circle><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </div>
-          <div><div class="summary-label">Estudiantes Evaluados</div><div class="summary-value" id="active-count">—</div></div>
-          <div class="summary-note" id="withdrawn-count">— retirados</div>
+          <div>
+            <div class="summary-label">Gamificación Positiva</div>
+            <div class="summary-value" style="font-size:16px;">Podios y Mérito</div>
+          </div>
+          <div class="summary-note">Estímulo al esfuerzo</div>
         </article>
 
         <article class="summary-card">
           <div class="summary-icon green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="m12 3 2.7 5.47 6.03.88-4.36 4.25 1.03 6.01L12 16.77l-5.4 2.84 1.03-6.01-4.36-4.25 6.03-.88L12 3Z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           </div>
-          <div><div class="summary-label">Promedio Institucional</div><div class="summary-value" id="school-average">—</div></div>
-          <div class="summary-note">sobre 100 pts</div>
+          <div>
+            <div class="summary-label">Control de Roles</div>
+            <div class="summary-value" style="font-size:16px;">Privacidad Total</div>
+          </div>
+          <div class="summary-note">Acceso por C.I.</div>
         </article>
 
         <article class="summary-card">
           <div class="summary-icon gold">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="8" r="6"></circle><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
           </div>
-          <div><div class="summary-label">Mejor Promedio</div><div class="summary-value" id="best-score">—</div></div>
-          <div class="summary-note" id="best-student">—</div>
+          <div>
+            <div class="summary-label">Infraestructura Web</div>
+            <div class="summary-value" style="font-size:16px;">100% Sin Costo</div>
+          </div>
+          <div class="summary-note">GitHub + Supabase</div>
         </article>
       </section>
 
-      <!-- CUADRO DE HONOR Y PODIO -->
-      <section class="leaderboard-card" aria-labelledby="ranking-title">
-        <div class="leaderboard-header">
-          <div class="section-heading">
-            <h2 class="section-title" id="ranking-title">Cuadro de Honor y Rendimiento</h2>
-            <div class="live-badge"><span></span> Datos Sincronizados</div>
-          </div>
-
-          <div class="toolbar">
-            <label class="search-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-              <input id="student-search" type="search" placeholder="Buscar estudiante por nombre...">
-            </label>
-            <select class="class-select" id="class-filter">
-              <option value="todos">Todos los cursos</option>
-            </select>
-            <select class="class-select" id="course-filter">
-              <option value="todos">Todas las materias</option>
-            </select>
+      <!-- EXPLICACIÓN DE FUNCIONAMIENTO POR ROLES -->
+      <section id="como-funciona" class="card-section">
+        <div class="section-title-wrap">
+          <div>
+            <h2>¿Cómo opera el sistema RankNotes?</h2>
+            <p class="section-subtitle">Arquitectura modular adaptada a la realidad educativa boliviana</p>
           </div>
         </div>
 
-        <!-- PODIO 1ER, 2DO Y 3ER LUGAR -->
-        <div class="podium" id="podium" aria-label="Tres mejores promedios"></div>
+        <div class="roles-grid">
+          <div class="role-box">
+            <div class="role-icon">🏛️</div>
+            <h3>1. Dirección y Secretaría</h3>
+            <p>Administra los 24 cursos de Primaria y Secundaria (paralelos A y B), registra nuevos docentes y distribuye la carga horaria por materias.</p>
+          </div>
 
-        <!-- TABLA GENERAL -->
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Puesto</th>
-                <th scope="col">Estudiante</th>
-                <th scope="col">Curso / Grado</th>
-                <th scope="col">Promedio</th>
-                <th scope="col">Condición</th>
-              </tr>
-            </thead>
-            <tbody id="student-list">
-              <tr><td colspan="5" style="text-align:center; padding:30px; color:var(--muted);">Cargando calificaciones de la base de datos...</td></tr>
-            </tbody>
-          </table>
-          <div class="empty-state" id="empty-state">No se encontraron calificaciones registradas para este filtro.</div>
-        </div>
+          <div class="role-box">
+            <div class="role-icon">👨‍🏫</div>
+            <h3>2. Plantel Docente</h3>
+            <p>Acceso restringido donde cada profesor solo visualiza sus cursos y asignaturas asignadas para registrar y ajustar valoraciones del 1er, 2do y 3er trimestre.</p>
+          </div>
 
-        <div class="table-footer">
-          <span id="results-count">Mostrando estudiantes</span>
-          <span class="footer-note">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
-            Los promedios se calculan automáticamente sobre notas oficiales registradas por los docentes.
-          </span>
-        </div>
-      </section>
-
-      <!-- MEJOR NOTA POR MATERIA -->
-      <section class="leaderboard-card course-section">
-        <div class="leaderboard-header">
-          <h2>Mejores Puntuaciones por Asignatura</h2>
-        </div>
-        <div class="table-caption" id="course-caption">Estudiantes con mayor nota registrada en cada materia curricular.</div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Materia</th>
-                <th scope="col">Estudiante Sobresaliente</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Nota Máxima</th>
-                <th scope="col">Promedio Grupal</th>
-              </tr>
-            </thead>
-            <tbody id="course-list">
-              <tr><td colspan="5" style="text-align:center; padding:20px; color:var(--muted);">Cargando materias...</td></tr>
-            </tbody>
-          </table>
+          <div class="role-box">
+            <div class="role-icon">🎓</div>
+            <h3>3. Estudiantes y Familias</h3>
+            <p>Consulta personalizada donde el alumno ve su boletín de materias y el cuadro de honor exclusivo de su aula, promoviendo el compromiso escolar.</p>
+          </div>
         </div>
       </section>
     </main>
   </div>
 
-  <script src="app.js"></script>
+  <script>
+    // VERIFICAR SI YA HAY SESIÓN PARA CAMBIAR EL BOTÓN DE ARRIBA
+    const user = JSON.parse(localStorage.getItem("ranknotes_user") || "null");
+    if (user) {
+      const authArea = document.querySelector("#auth-area");
+      let destino = "login.html";
+      if (user.rol === "director") destino = "director.html";
+      else if (user.rol === "docente") destino = "admin.html";
+      else if (user.rol === "estudiante") destino = "estudiante.html";
+
+      authArea.innerHTML = `
+        <div style="display:flex; align-items:center; gap:8px;">
+          <a href="${destino}" class="btn-login">Ir a mi Panel (${user.nombre.split(" ")[0]})</a>
+          <button class="btn-logout" onclick="localStorage.removeItem('ranknotes_user'); location.reload();">Salir</button>
+        </div>
+      `;
+    }
+
+    // CONTROL DEL TEMA CLARO / OSCURO
+    const themeToggle = document.querySelector("#theme-toggle");
+    const themeIcon = document.querySelector("#theme-icon");
+
+    function applyTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      const isDark = theme === "dark";
+      if (themeToggle) themeToggle.setAttribute("aria-label", isDark ? "Activar modo claro" : "Activar modo oscuro");
+      if (themeIcon) {
+        themeIcon.innerHTML = isDark
+          ? '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>'
+          : '<path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z"></path>';
+      }
+    }
+
+    applyTheme(localStorage.getItem("ranknotes-theme") || "light");
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      applyTheme(nextTheme);
+      localStorage.setItem("ranknotes-theme", nextTheme);
+    });
+  </script>
 </body>
 </html>

@@ -63,7 +63,7 @@ form.addEventListener("submit", async (e) => {
     } else if (user.rol === "docente") {
       window.location.href = "admin.html";
     } else if (user.rol === "estudiante") {
-      window.location.href = "index.html";
+      window.location.href = "estudiante.html"; // <-- AHORA VA DIRECTO AL PORTAL DEL ALUMNO
     } else {
       throw new Error("Rol de usuario desconocido.");
     }

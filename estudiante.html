@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RankNotes — Portal del Estudiante</title>
+  <link rel="stylesheet" href="estudiante.css">
+  <!-- Supabase CDN Oficial -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- BARRA SUPERIOR -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"></path>
+            <path d="m9 9 2 2 4-4"></path>
+          </svg>
+        </div>
+        <div class="brand-name">rank<span>notes</span> · <small>Estudiante</small></div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="student-profile-badge">
+          <span class="avatar-circle" id="student-avatar">—</span>
+          <div class="profile-info">
+            <strong id="student-name">Cargando...</strong>
+            <span id="student-course-badge">—</span>
+          </div>
+        </div>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z"></path>
+          </svg>
+        </button>
+
+        <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- BANNER PERSONAL DE RENDIMIENTO -->
+      <section class="student-hero">
+        <div class="hero-left">
+          <div class="hero-tag">Rendimiento Personal · Gestión 2026</div>
+          <h1 id="welcome-message">¡Bienvenido(a)!</h1>
+          <p id="personal-summary-text">Calculando tu posición y promedio general en el curso...</p>
+        </div>
+
+        <div class="period-tabs" role="group" aria-label="Trimestre">
+          <button class="period-button active" type="button" data-period="s1">1er Trimestre</button>
+          <button class="period-button" type="button" data-period="s2">2do Trimestre</button>
+          <button class="period-button" type="button" data-period="s3">3er Trimestre</button>
+          <button class="period-button" type="button" data-period="year">Gestión Anual</button>
+        </div>
+      </section>
+
+      <!-- TARJETAS DE MÉTRICAS PERSONALES -->
+      <section class="summary-grid">
+        <article class="summary-card">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+          </div>
+          <div>
+            <div class="summary-label">Tu Promedio General</div>
+            <div class="summary-value" id="my-average">—</div>
+          </div>
+          <div class="summary-note">sobre 100 pts</div>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-icon gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+          </div>
+          <div>
+            <div class="summary-label">Tu Puesto en el Curso</div>
+            <div class="summary-value" id="my-rank">—</div>
+          </div>
+          <div class="summary-note" id="my-rank-total">entre 20 compañeros</div>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div>
+            <div class="summary-label">Materias Evaluadas</div>
+            <div class="summary-value" id="my-subjects-count">—</div>
+          </div>
+          <div class="summary-note" id="my-approval-status">Estado regular</div>
+        </article>
+      </section>
+
+      <!-- BOLETÍN DETALLADO DE NOTAS PERSONALES -->
+      <section class="card-section">
+        <div class="section-title-wrap">
+          <h2>Boletín Trimestral de Calificaciones</h2>
+          <span class="badge-accent">Tus Notas Registradas</span>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Materia Curricular</th>
+                <th style="text-align: center;">Nota Obtenida</th>
+                <th>Estado</th>
+                <th>Progreso Gráfico</th>
+              </tr>
+            </thead>
+            <tbody id="my-grades-table">
+              <tr><td colspan="4" class="text-center">Cargando tus calificaciones...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CUADRO DE HONOR Y TABLA DEL CURSO -->
+      <section class="card-section">
+        <div class="section-title-wrap">
+          <div>
+            <h2>Cuadro de Honor de tu Aula</h2>
+            <p id="course-name-title" class="section-subtitle">Calificaciones correspondientes a tu curso</p>
+          </div>
+          <span class="badge-status activo">Compañeros de Aula</span>
+        </div>
+
+        <!-- PODIO 1ER, 2DO Y 3ER LUGAR DEL CURSO -->
+        <div class="podium" id="course-podium"></div>
+
+        <!-- TABLA COMPLETA DEL CURSO -->
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Puesto</th>
+                <th scope="col">Estudiante</th>
+                <th scope="col">C.I.</th>
+                <th scope="col">Promedio</th>
+                <th scope="col">Condición</th>
+              </tr>
+            </thead>
+            <tbody id="course-ranking-body">
+              <tr><td colspan="5" class="text-center">Cargando cuadro del curso...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="estudiante.js"></script>
+</body>
+</html>

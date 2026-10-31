@@ -420,3 +420,75 @@ tbody tr:hover { background: var(--row-hover); }
     text-align: center;
   }
 }
+
+/* ESTILOS DE LANDING HERO Y ROLES */
+.landing-hero {
+  text-align: center;
+  max-width: 780px;
+  margin: 30px auto 44px;
+}
+
+.landing-hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+  margin: 12px 0 16px;
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 auto 26px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+  background: var(--purple);
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 750;
+  padding: 12px 24px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(109, 92, 232, 0.28);
+  transition: all 0.2s ease;
+}
+.btn-hero-primary:hover { background: var(--purple-dark); transform: translateY(-2px); }
+
+.btn-hero-secondary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.btn-hero-secondary:hover { background: var(--purple-soft); color: var(--purple); }
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.role-box {
+  background: var(--page);
+  border: 1px solid var(--line);
+  padding: 22px;
+  border-radius: 14px;
+}
+
+.role-icon { font-size: 30px; margin-bottom: 12px; }
+.role-box h3 { margin: 0 0 8px; font-size: 16px; font-weight: 750; }
+.role-box p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
