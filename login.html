@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RankNotes — Iniciar Sesión</title>
+  <link rel="stylesheet" href="login.css">
+  <!-- Supabase CDN Oficial -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="brand-header">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"></path>
+            <path d="m9 9 2 2 4-4"></path>
+          </svg>
+        </div>
+        <h1>rank<span>notes</span></h1>
+        <p>U.E. Avelino Siñani · Sistema Institucional de Calificaciones</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="ci-input">Carnet de Identidad o Usuario</label>
+          <input type="text" id="ci-input" placeholder="Ingrese su C.I. institucional" required autofocus autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="password-input">Contraseña</label>
+          <input type="password" id="password-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-submit">Ingresar al Sistema</button>
+        <div id="error-message" class="error-msg" style="display: none;"></div>
+      </form>
+
+      <div class="back-link">
+        <a href="index.html">← Volver al Portal Público</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

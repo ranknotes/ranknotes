@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RankNotes — Panel Docente</title>
+  <link rel="stylesheet" href="admin.css">
+  <!-- Supabase CDN Oficial -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">rank<span>notes</span> · <small style="color:var(--muted); font-size:12px;">Cargando perfil...</small></div>
+    <div id="auth-controls" style="display:flex; align-items:center; gap:10px;">
+      <a href="index.html" class="btn btn-secondary" style="text-decoration:none;">Ver Sitio Público</a>
+      <button class="btn btn-secondary" id="logout-btn" style="display:none;" onclick="logout()">Cerrar Sesión</button>
+      
+      <!-- BOTÓN MODO CLARO / OSCURO -->
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Modo claro/oscuro">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- PANEL DE CARGA Y PLANILLA DE NOTAS (PROTEGIDO) -->
+    <section id="admin-sec" style="display:none;">
+      <!-- Matriculación rápida de alumnos en el curso -->
+      <div class="card">
+        <h3 style="margin-top:0;">Matriculación Rápida de Estudiante</h3>
+        <div class="grid-2">
+          <div>
+            <label style="font-size:12px; font-weight:600;">Nombre Completo del Estudiante</label>
+            <input type="text" id="new-student-name" placeholder="Ej: Kevin Mendoza Paredes">
+          </div>
+          <div>
+            <label style="font-size:12px; font-weight:600;">Curso / Año Escolar Asignado</label>
+            <select id="new-student-course"></select>
+          </div>
+        </div>
+        <button class="btn" style="margin-top:14px;" onclick="registrarEstudiante()">Matricular en Curso</button>
+      </div>
+
+      <!-- Planilla de Calificaciones -->
+      <div class="card">
+        <h3 style="margin-top:0;">Planilla de Calificaciones</h3>
+        <div class="grid-3">
+          <div>
+            <label style="font-size:12px; font-weight:600;">Curso Asignado</label>
+            <select id="select-course"></select>
+          </div>
+          <div>
+            <label style="font-size:12px; font-weight:600;">Materia Asignada</label>
+            <select id="select-subject"></select>
+          </div>
+          <div>
+            <label style="font-size:12px; font-weight:600;">Periodo / Trimestre</label>
+            <select id="select-period">
+              <option value="s1">1er Trimestre</option>
+              <option value="s2">2do Trimestre</option>
+              <option value="s3">3er Trimestre</option>
+            </select>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Estudiante</th>
+              <th>Estado</th>
+              <th style="width:120px; text-align:center;">Nota (0 - 100)</th>
+            </tr>
+          </thead>
+          <tbody id="grades-table-body">
+            <tr><td colspan="3" style="text-align:center; color:var(--muted); padding:20px;">Cargando estudiantes...</td></tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:20px; display:flex; justify-content:flex-end;">
+          <button class="btn" onclick="guardarCalificaciones()">Guardar Calificaciones</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
